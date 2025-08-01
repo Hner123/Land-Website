@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amenities Gallery</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .amenities-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 60px 40px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #7f8c8d;
+        margin-bottom: 50px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .amenities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .amenity-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+      }
+
+      .amenity-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+      }
+
+      .amenity-image {
+        width: 100%;
+        height: 250px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .amenity-image::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.8),
+          rgba(118, 75, 162, 0.8)
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .amenity-card:hover .amenity-image::before {
+        opacity: 1;
+      }
+
+      .clubhouse {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"><rect width="400" height="250" fill="%23f39c12"/><rect x="50" y="120" width="300" height="100" rx="10" fill="%23e74c3c"/><polygon points="50,120 200,60 350,120" fill="%23d35400"/><circle cx="150" cy="160" r="8" fill="%23ffffff"/><rect x="140" y="168" width="20" height="40" fill="%23ffffff"/><rect x="220" y="150" width="40" height="20" fill="%233498db"/><rect x="280" y="150" width="40" height="20" fill="%233498db"/></svg>');
+      }
+
+      .infinity-pool {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"><rect width="400" height="250" fill="%234a90e2"/><path d="M50 150 Q200 130 350 150 V220 H50 Z" fill="%233498db"/><path d="M350 150 Q375 145 400 150 V250 H350 Z" fill="%232980b9"/><circle cx="120" cy="100" r="25" fill="%23ffffff" opacity="0.3"/><circle cx="280" cy="120" r="20" fill="%23ffffff" opacity="0.4"/><rect x="30" y="220" width="40" height="15" rx="5" fill="%23e67e22"/></svg>');
+      }
+
+      .playground {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"><rect width="400" height="250" fill="%23f1c40f"/><rect x="80" y="160" width="60" height="80" rx="10" fill="%233498db"/><polygon points="80,160 110,120 140,160" fill="%23e74c3c"/><circle cx="200" cy="180" r="30" fill="%23e67e22"/><rect x="270" y="140" width="80" height="100" rx="10" fill="%2327ae60"/><rect x="285" y="120" width="50" height="20" rx="10" fill="%23f39c12"/><circle cx="320" cy="90" r="15" fill="%23e74c3c"/></svg>');
+      }
+
+      .gym {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"><rect width="400" height="250" fill="%23ecf0f1"/><rect x="50" y="100" width="80" height="50" rx="10" fill="%23e74c3c"/><rect x="270" y="100" width="80" height="50" rx="10" fill="%23e74c3c"/><rect x="130" y="120" width="140" height="10" rx="5" fill="%2334495e"/><circle cx="100" cy="80" r="15" fill="%2334495e"/><circle cx="300" cy="80" r="15" fill="%2334495e"/><rect x="180" y="180" width="40" height="60" rx="5" fill="%233498db"/></svg>');
+      }
+
+      .basketball-court {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"><rect width="400" height="250" fill="%23f39c12"/><rect x="20" y="50" width="360" height="150" rx="10" fill="%23e67e22"/><circle cx="200" cy="125" r="40" stroke="%23ffffff" stroke-width="3" fill="none"/><circle cx="200" cy="125" r="8" fill="%23ffffff"/><rect x="20" y="100" width="30" height="50" rx="5" fill="%23ffffff"/><rect x="350" y="100" width="30" height="50" rx="5" fill="%23ffffff"/><line x1="200" y1="50" x2="200" y2="200" stroke="%23ffffff" stroke-width="2"/></svg>');
+      }
+
+      .tennis-badminton {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"><rect width="400" height="250" fill="%2327ae60"/><rect x="50" y="75" width="300" height="100" rx="5" fill="%233498db"/><line x1="200" y1="75" x2="200" y2="175" stroke="%23ffffff" stroke-width="3"/><rect x="195" y="60" width="10" height="130" fill="%23e74c3c"/><circle cx="120" cy="100" r="8" fill="%23ffffff"/><circle cx="280" cy="150" r="8" fill="%23ffffff"/><rect x="100" y="40" width="40" height="8" rx="4" fill="%23f39c12"/></svg>');
+      }
+
+      .billiard {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"><rect width="400" height="250" fill="%2334495e"/><rect x="50" y="80" width="300" height="150" rx="15" fill="%2327ae60"/><rect x="60" y="90" width="280" height="130" rx="10" fill="%23196f3d"/><circle cx="120" cy="130" r="8" fill="%23ffffff"/><circle cx="160" cy="150" r="8" fill="%23e74c3c"/><circle cx="200" cy="140" r="8" fill="%23f39c12"/><circle cx="240" cy="160" r="8" fill="%233498db"/><circle cx="280" cy="130" r="8" fill="%23000000"/><rect x="80" y="60" width="8" height="40" rx="4" fill="%23d35400"/></svg>');
+      }
+
+      .amenity-content {
+        padding: 30px;
+      }
+
+      .amenity-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .amenity-description {
+        color: #7f8c8d;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        font-size: 1rem;
+      }
+
+      .amenity-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .feature-tag {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .icon {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+      }
+
+      @media (max-width: 768px) {
+        .amenities-section {
+          padding: 40px 20px;
+        }
+
+        .section-title {
+          font-size: 2.5rem;
+        }
+
+        .amenities-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="amenities-section">
+      <h2 class="section-title">Amenities</h2>
+      <p class="section-subtitle">
+        Experience luxury and convenience with our world-class facilities
+        designed for your comfort and enjoyment
+      </p>
+
+      <div class="amenities-grid">
+        <div class="amenity-card">
+          <div class="amenity-image clubhouse"></div>
+          <div class="amenity-content">
+            <h3 class="amenity-title">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              Club House
+            </h3>
+            <p class="amenity-description">
+              Experience elegance at our exclusive clubhouse featuring
+              comfortable lounges, meeting spaces, and social areas. The perfect
+              venue for events, gatherings, and relaxation with fellow
+              residents.
+            </p>
+            <div class="amenity-features">
+              <span class="feature-tag">Event Venue</span>
+              <span class="feature-tag">Meeting Rooms</span>
+              <span class="feature-tag">Lounge Areas</span>
+              <span class="feature-tag">AC Controlled</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-image infinity-pool"></div>
+          <div class="amenity-content">
+            <h3 class="amenity-title">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path
+                  d="M2 15.5C3.5 15.5 3.5 14 5 14s1.5 1.5 3 1.5 1.5-1.5 3-1.5 1.5 1.5 3 1.5 1.5-1.5 3-1.5 1.5 1.5 3 1.5v1c-1.5 0-1.5 1.5-3 1.5s-1.5-1.5-3-1.5-1.5 1.5-3 1.5-1.5-1.5-3-1.5-1.5 1.5-3 1.5-1.5-1.5-3-1.5v-1z"
+                />
+              </svg>
+              Infinity Pool
+            </h3>
+            <p class="amenity-description">
+              Immerse yourself in luxury with our stunning infinity pool that
+              creates a seamless blend with the horizon. Perfect for swimming
+              laps or simply floating while enjoying breathtaking views.
+            </p>
+            <div class="amenity-features">
+              <span class="feature-tag">Infinity Edge</span>
+              <span class="feature-tag">Heated Water</span>
+              <span class="feature-tag">Pool Deck</span>
+              <span class="feature-tag">Scenic Views</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-image playground"></div>
+          <div class="amenity-content">
+            <h3 class="amenity-title">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path
+                  d="M9.5 11H11v2H9.5v-2zm0-4H11v2H9.5V7zm4 0H15v2h-1.5V7zm0 4H15v2h-1.5v-2zM8 18h8v2H8v-2zM12 2l5.5 3h-11L12 2z"
+                />
+              </svg>
+              Kids Playground
+            </h3>
+            <p class="amenity-description">
+              A safe and fun playground designed for children of all ages
+              featuring colorful play equipment, slides, swings, and interactive
+              elements in a secure, well-maintained environment.
+            </p>
+            <div class="amenity-features">
+              <span class="feature-tag">Safe Equipment</span>
+              <span class="feature-tag">Age Appropriate</span>
+              <span class="feature-tag">Soft Flooring</span>
+              <span class="feature-tag">Shaded Areas</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-image gym"></div>
+          <div class="amenity-content">
+            <h3 class="amenity-title">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path
+                  d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"
+                />
+              </svg>
+              Gym
+            </h3>
+            <p class="amenity-description">
+              Stay fit and healthy with our fully-equipped gymnasium featuring
+              modern cardio machines, strength training equipment, free weights,
+              and spacious workout areas for all fitness levels.
+            </p>
+            <div class="amenity-features">
+              <span class="feature-tag">Modern Equipment</span>
+              <span class="feature-tag">Cardio Machines</span>
+              <span class="feature-tag">Free Weights</span>
+              <span class="feature-tag">AC Controlled</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-image basketball-court"></div>
+          <div class="amenity-content">
+            <h3 class="amenity-title">
+              <svg class="icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a10 10 0 0 1 0 20M12 2a10 10 0 0 0 0 20" />
+                <path d="M8 12a4 4 0 0 1 8 0M8 12a4 4 0 0 0 8 0" />
+              </svg>
+              Basketball Court
+            </h3>
+            <p class="amenity-description">
+              Shoot hoops and stay active on our regulation-size basketball
+              court with professional-grade flooring, proper lighting, and
+              official court markings for competitive play or casual fun.
+            </p>
+            <div class="amenity-features">
+              <span class="feature-tag">Regulation Size</span>
+              <span class="feature-tag">LED Lighting</span>
+              <span class="feature-tag">Pro Flooring</span>
+              <span class="feature-tag">Official Markings</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-image tennis-badminton"></div>
+          <div class="amenity-content">
+            <h3 class="amenity-title">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path
+                  d="M5.5 7.5c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM12 4c-1.9 0-3.5 1.6-3.5 3.5s1.6 3.5 3.5 3.5 3.5-1.6 3.5-3.5S13.9 4 12 4zm0 5.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"
+                />
+                <path d="M9 16h6v2H9v-2z" />
+              </svg>
+              Tennis/Badminton Court
+            </h3>
+            <p class="amenity-description">
+              Multi-purpose court designed for both tennis and badminton with
+              adjustable nets, proper court dimensions, and high-quality
+              synthetic surface for optimal gameplay and safety.
+            </p>
+            <div class="amenity-features">
+              <span class="feature-tag">Multi-Purpose</span>
+              <span class="feature-tag">Adjustable Nets</span>
+              <span class="feature-tag">Synthetic Surface</span>
+              <span class="feature-tag">LED Lighting</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-image billiard"></div>
+          <div class="amenity-content">
+            <h3 class="amenity-title">
+              <svg class="icon" viewBox="0 0 24 24">
+                <rect x="2" y="8" width="20" height="12" rx="2" ry="2" />
+                <circle cx="8" cy="12" r="1" />
+                <circle cx="12" cy="14" r="1" />
+                <circle cx="16" cy="12" r="1" />
+                <path d="M6 8V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2" />
+              </svg>
+              Billiard Room
+            </h3>
+            <p class="amenity-description">
+              Enjoy a classic game of billiards in our sophisticated gaming room
+              featuring professional-grade pool tables, proper lighting, and
+              comfortable seating areas for entertainment and relaxation.
+            </p>
+            <div class="amenity-features">
+              <span class="feature-tag">Professional Tables</span>
+              <span class="feature-tag">Quality Cues</span>
+              <span class="feature-tag">Proper Lighting</span>
+              <span class="feature-tag">Comfortable Seating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
