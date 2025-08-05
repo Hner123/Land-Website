@@ -208,10 +208,6 @@
     font-size: 1.5rem;
   }
 
-  .locations-grid {
-    grid-template-columns: 1fr;
-  }
-
   .nearby-locations,
   .amenities-section {
     padding: 30px 20px;

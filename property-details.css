@@ -326,8 +326,19 @@
   .proximity-grid {
     grid-template-columns: 1fr;
   }
+}
 
+@media (max-width: 480px) {
+  .features .container {
+    padding: 0;
+  }
   .lot-specs {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gallery1,
+  .gallery2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }
