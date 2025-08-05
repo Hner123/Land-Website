@@ -11,7 +11,7 @@ body {
   overflow-x: hidden;
 }
 
-.container {
+.container-custom {
   /* max-width: 1200px; */
   margin: 0 auto;
   padding: 0 20px;
@@ -57,6 +57,14 @@ nav {
 
 .nav-links a:hover {
   color: #2c5530;
+}
+
+.hero-video.hidden {
+  opacity: 0;
+}
+
+.hero-video {
+  transition: opacity 0.5s ease-in-out;
 }
 
 .hero {
@@ -114,7 +122,7 @@ nav {
   animation: fadeInUp 1s ease;
 }
 
-.hero .container {
+.hero .container-custom {
   margin-left: 150px;
 }
 
@@ -573,7 +581,7 @@ footer {
 }
 
 @media (max-width: 1024px) {
-  .hero .container {
+  .hero .container-custom {
     margin-left: 80px;
   }
   .floating-card-3 {
@@ -628,7 +636,7 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .hero .container {
+  .hero .container-custom {
     margin-left: auto;
   }
   .upper-right-button {

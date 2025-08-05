@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Showcase</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .property-section {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        text-align: center;
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 3rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .property-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 40px;
+        padding: 0 20px;
+      }
+
+      .property-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .property-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+      }
+
+      .property-image {
+        width: 100%;
+        height: 350px;
+        background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .property-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+
+      .property-card:hover .property-image img {
+        transform: scale(1.1);
+      }
+
+      .property-image::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.1),
+          rgba(118, 75, 162, 0.1)
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+      }
+
+      .property-card:hover .property-image::before {
+        opacity: 1;
+      }
+
+      .property-details {
+        padding: 30px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+      }
+
+      .property-type {
+        font-size: 0.9rem;
+        color: #667eea;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        background: rgba(102, 126, 234, 0.1);
+        padding: 6px 12px;
+        border-radius: 20px;
+        display: inline-block;
+      }
+
+      .property-price {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #667eea;
+        margin-bottom: 15px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .property-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .info-item {
+        text-align: center;
+        padding: 15px;
+        background: rgba(102, 126, 234, 0.05);
+        border-radius: 12px;
+        border: 1px solid rgba(102, 126, 234, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .info-item:hover {
+        background: rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .info-label {
+        font-size: 0.8rem;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+      }
+
+      .info-value {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .property-proximity {
+        color: #888;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-style: italic;
+      }
+
+      .property-proximity::before {
+        content: "🚇";
+        font-size: 1rem;
+      }
+
+      .property-description {
+        background: rgba(102, 126, 234, 0.03);
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border-left: 4px solid #667eea;
+      }
+
+      .property-description p {
+        color: #555;
+        line-height: 1.6;
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      .property-address {
+        color: #666;
+        font-size: 1rem;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .property-address::before {
+        content: "📍";
+        font-size: 1.2rem;
+      }
+
+      .property-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .feature-tag {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .feature-tag:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      @media (max-width: 1100px) {
+        .property-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .section-title {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+
+        .property-details {
+          padding: 20px;
+        }
+
+        .property-info {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="property-section">
+      <h1 class="section-title">Featured Properties</h1>
+
+      <div class="property-grid">
+        <!-- Property 1 -->
+        <div class="property-card">
+          <div class="property-image">
+            <img
+              src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+              alt="Residential Lot"
+            />
+          </div>
+          <div class="property-details">
+            <div class="property-type">Residential Lot</div>
+            <div class="property-price">₱15,500,000</div>
+            <div class="property-address">
+              Makati Central Business District, Metro Manila
+            </div>
+            <div class="property-proximity">
+              Near Greenbelt Mall, Ayala MRT Station • 5 min to Makati Med
+            </div>
+
+            <div class="property-info">
+              <div class="info-item">
+                <div class="info-label">Lot Area</div>
+                <div class="info-value">370 sqm</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Title</div>
+                <div class="info-value">Clean</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Zoning</div>
+                <div class="info-value">Residential</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Corner Lot</div>
+                <div class="info-value">Yes</div>
+              </div>
+            </div>
+
+            <div class="property-description">
+              <p>
+                Prime residential lot in the heart of Makati's business
+                district. Ideal for building your dream home or investment
+                property. Walking distance to top schools including Ateneo
+                Professional Schools and Assumption College. Close to premium
+                shopping at Greenbelt and Glorietta. Excellent connectivity via
+                MRT and major highways.
+              </p>
+            </div>
+
+            <div class="property-features">
+              <span class="feature-tag">Utilities Ready</span>
+              <span class="feature-tag">Gated Subdivision</span>
+              <span class="feature-tag">24/7 Security</span>
+              <span class="feature-tag">Flood-Free</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property 2 -->
+        <div class="property-card">
+          <div class="property-image">
+            <img
+              src="https://images.unsplash.com/photo-1574102602133-8842b5ac2a28?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+              alt="Commercial Lot"
+            />
+          </div>
+          <div class="property-details">
+            <div class="property-type">Commercial Lot</div>
+            <div class="property-price">₱8,750,000</div>
+            <div class="property-address">BGC, Taguig City, Metro Manila</div>
+            <div class="property-proximity">
+              The Fort Strip, SM Aura • 10 min to NAIA via expressway
+            </div>
+
+            <div class="property-info">
+              <div class="info-item">
+                <div class="info-label">Lot Area</div>
+                <div class="info-value">185 sqm</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Title</div>
+                <div class="info-value">Clean</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Zoning</div>
+                <div class="info-value">Commercial</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Floor Ratio</div>
+                <div class="info-value">4.0</div>
+              </div>
+            </div>
+
+            <div class="property-description">
+              <p>
+                Prime commercial lot in BGC's premier business district. Perfect
+                for retail, office, or mixed-use development. Minutes from
+                international schools like BGC International School and Manila
+                Japanese School. World-class dining and shopping at High Street
+                and Market Market. Future Subway Line connection planned.
+              </p>
+            </div>
+
+            <div class="property-features">
+              <span class="feature-tag">High Traffic Area</span>
+              <span class="feature-tag">Utilities Ready</span>
+              <span class="feature-tag">Investment Grade</span>
+              <span class="feature-tag">Development Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

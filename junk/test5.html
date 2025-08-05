@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      .item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+
+      .item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .item:hover img {
+        transform: scale(1.05);
+      }
+
+      .hover-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 20px;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        color: white;
+      }
+
+      .item:hover .hover-overlay {
+        opacity: 1;
+      }
+
+      .hover-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      }
+
+      .hover-description {
+        font-size: 14px;
+        line-height: 1.4;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      }
+
+      #carousel_section {
+        padding: 40px 20px;
+        background: #f8f9fa;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="carousel_section">
+      <div class="owl-carousel owl-theme uk-scrollspy-outview" uk-scrollspy="cls: uk-animation-slide-bottom-small; delay: 250; repeat: true">
+        <div class="item">
+          <img src="./images/amenities/basketball-court.JPG" loading="lazy" alt="Basketball Court" />
+          <div class="hover-overlay">
+            <div class="hover-title">Basketball Court</div>
+            <div class="hover-description">Full-size professional basketball court for recreational games and tournaments</div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="./images/amenities/Billiard-hall.JPG" loading="lazy" alt="Billiard Hall" />
+          <div class="hover-overlay">
+            <div class="hover-title">Billiard Hall</div>
+            <div class="hover-description">Premium billiard tables in a sophisticated entertainment lounge setting</div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="./images/amenities/club-house.JPG" loading="lazy" alt="Club House" />
+          <div class="hover-overlay">
+            <div class="hover-title">Club House</div>
+            <div class="hover-description">Elegant community center for events, meetings, and social gatherings</div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="./images/amenities/gym.JPG" loading="lazy" alt="Fitness Gym" />
+          <div class="hover-overlay">
+            <div class="hover-title">Fitness Gym</div>
+            <div class="hover-description">State-of-the-art fitness center with modern equipment and training facilities</div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="./images/amenities/infinity-pool.JPG" loading="lazy" alt="Infinity Pool" />
+          <div class="hover-overlay">
+            <div class="hover-title">Infinity Pool</div>
+            <div class="hover-description">Stunning infinity pool with breathtaking views and relaxation areas</div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="./images/amenities/kids-playground.JPG" loading="lazy" alt="Kids Playground" />
+          <div class="hover-overlay">
+            <div class="hover-title">Kids Playground</div>
+            <div class="hover-description">Safe and fun playground area designed for children of all ages</div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="./images/amenities/tennis-badminton.JPG" loading="lazy" alt="Tennis & Badminton Court" />
+          <div class="hover-overlay">
+            <div class="hover-title">Tennis & Badminton Court</div>
+            <div class="hover-description">Multi-purpose courts for tennis and badminton with professional-grade surfaces</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+      integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script type="text/javascript">
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: false,
+        autoplay: true,
+        autoplayTimeout: 2500,
+        responsive: {
+          0: {
+            items: 1,
+          },
+          600: {
+            items: 2,
+          },
+          1000: {
+            items: 2,
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
