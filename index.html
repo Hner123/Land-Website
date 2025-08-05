@@ -73,21 +73,19 @@
     <section class="hero">
       <!-- Replace the src attribute below with your video URL -->
       <!-- First video (smaller, loads immediately) -->
-      <video id="video1" class="hero-video" autoplay muted playsinline>
+      <video id="video1" class="hero-video" autoplay muted loop playsinline>
         <source src="./video/web-vid-part1.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
 
-      <!-- Second video (preloaded in background) -->
       <video
         id="video2"
         class="hero-video hidden"
         muted
+        loop
         playsinline
         preload="auto"
       >
         <source src="./video/web-vid-part2.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
 
       <div class="hero-overlay"></div>
@@ -875,35 +873,28 @@
     ></script>
     <!-- video hero -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const video1 = document.getElementById("video1");
-        const video2 = document.getElementById("video2");
-        let hasTransitioned = false;
+      const video1 = document.getElementById("video1");
+      const video2 = document.getElementById("video2");
+      let currentVideo = 1;
 
-        function switchToVideo2() {
-          if (!hasTransitioned && video2.readyState >= 3) {
-            hasTransitioned = true;
-            video2.currentTime = 0;
-            video2.play();
-            video2.loop = true;
-            video2.classList.remove("hidden");
-            video1.classList.add("hidden");
-
-            setTimeout(() => {
-              video1.style.display = "none";
-            }, 5000);
-          }
+      function switchVideo() {
+        if (currentVideo === 1) {
+          video2.currentTime = 0;
+          video2.play();
+          video2.classList.remove("hidden");
+          video1.classList.add("hidden");
+          currentVideo = 2;
+        } else {
+          video1.currentTime = 0;
+          video1.play();
+          video1.classList.remove("hidden");
+          video2.classList.add("hidden");
+          currentVideo = 1;
         }
+      }
 
-        video2.addEventListener("canplaythrough", switchToVideo2);
-        video2.addEventListener("loadeddata", switchToVideo2);
-
-        setTimeout(() => {
-          if (!hasTransitioned && video2.readyState >= 2) {
-            switchToVideo2();
-          }
-        }, 3000);
-      });
+      video1.addEventListener("ended", switchVideo);
+      video2.addEventListener("ended", switchVideo);
     </script>
   </body>
 </html>
