@@ -556,6 +556,18 @@ footer {
   fill: currentColor;
 }
 
+@media (max-width: 1300px) {
+  .floating-card-3 {
+    bottom: 55%;
+  }
+}
+
+@media (max-width: 800px) {
+  .floating-card {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero .container {
     margin-left: 80px;
@@ -606,6 +618,9 @@ footer {
   .floating-card {
     display: none;
   }
+  .upper-right-button {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -629,5 +644,8 @@ footer {
   }
   .amenities-title {
     margin-top: 20px;
+  }
+  .hero {
+    height: 90vh;
   }
 }

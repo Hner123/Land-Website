@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./property-details.css" />
     <link rel="stylesheet" href="./amenities.css" />
     <link rel="stylesheet" href="./contacts.css" />
+    <link rel="stylesheet" href="./mobileNavButton.css" />
 
     <link
       rel="stylesheet"
@@ -35,12 +36,27 @@
     <header>
       <nav class="container">
         <a href="#" class="logo">🏞️ Premier Land</a>
-        <ul class="nav-links">
-          <li><a href="#properties">Properties</a></li>
-          <li><a href="#amenities">Amenities</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#">Blog</a></li>
-        </ul>
+
+        <nav class="nav-links">
+          <ul>
+            <li><a href="#properties">Properties</a></li>
+            <li><a href="#amenities">Amenities</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </nav>
+
+        <label class="hamburger" for="menu_bar">
+          <input type="checkbox" id="menu_bar" />
+          <svg viewBox="0 0 32 32">
+            <path
+              class="line line-top-bottom"
+              d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+            ></path>
+            <path class="line" d="M7 16 27 16"></path>
+          </svg>
+        </label>
+
         <a href="#contact" class="btn-primary upper-right-button"
           >Schedule a Tour</a
         >
@@ -808,6 +824,30 @@
               }
             );
         });
+    </script>
+
+    <!-- mobile menue toggle -->
+    <script>
+      // JavaScript to handle both hamburger animation and mobile menu toggle
+      const menuCheckbox = document.getElementById("menu_bar");
+      const navLinks = document.querySelector(".nav-links");
+
+      menuCheckbox.addEventListener("change", function () {
+        if (this.checked) {
+          navLinks.classList.add("show");
+        } else {
+          navLinks.classList.remove("show");
+        }
+      });
+
+      // Close menu when clicking on links (mobile)
+      const navLinkItems = document.querySelectorAll(".nav-links a");
+      navLinkItems.forEach((link) => {
+        link.addEventListener("click", () => {
+          menuCheckbox.checked = false;
+          navLinks.classList.remove("show");
+        });
+      });
     </script>
   </body>
 </html>
