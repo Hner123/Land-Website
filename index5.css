@@ -65,6 +65,10 @@ nav {
   align-items: center;
   position: relative;
   overflow: hidden;
+  z-index: 5;
+  background-image: url("./images/property/alabang-west-village-aerial-community-view-prime-lots-investment-opportunity.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
 .hero::before {
