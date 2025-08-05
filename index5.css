@@ -615,4 +615,19 @@ footer {
   .upper-right-button {
     display: none;
   }
+  .premium-features {
+    padding: 0.8rem !important;
+  }
+  .hover-description {
+    display: none;
+  }
+  .amenities-section {
+    padding: 0 !important;
+  }
+  .hover-title {
+    font-size: 14px !important;
+  }
+  .amenities-title {
+    margin-top: 20px;
+  }
 }
